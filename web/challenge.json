@@ -1,0 +1,25 @@
+{
+    "32_byte_secret_plus_query_hash": "e9eebdd4c92f2ae5bf85a13992759d1b4366ead1ceb6b497e1f66e85a856ac56",
+    "public_meetings": [
+      {
+        "appearance": "public",
+        "id": 1,
+        "time": "2023-02-20 16:00:00",
+        "title": "The Breifing"
+      },
+      {
+        "appearance": "public",
+        "id": 2,
+        "time": "2023-01-01 12:00:00",
+        "title": "The Trenchcoat Summit"
+      },
+      {
+        "appearance": "public",
+        "id": 3,
+        "time": "2024-01-01 17:00:00",
+        "title": "The Last Cipher Club"
+      }
+    ],
+    "query": "SELECT * FROM meetings WHERE appearance='public'",
+    "text-encoding": "latin-1"
+  }

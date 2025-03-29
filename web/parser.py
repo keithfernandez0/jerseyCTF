@@ -3,30 +3,37 @@ import hmac
 import requests
 import json
 
-# Set the URL for the verification endpoint
+# Challenge and verification URLs
+challenge_url = "http://a-hash-too-far.aws.jerseyctf.com:5000/challenge"
 verify_url = "http://a-hash-too-far.aws.jerseyctf.com:5000/verify"
 
-# Define the secret key (32-byte string, for example)
-secret_key = b"32-byte-secret-key-here-12345678"
+# Original Query
+query = "SELECT * FROM meetings WHERE appearance='public'"
 
-# Define the required message
-message = "meet at the following coordinates:23,28'57\"S 124,34'34\"W"
+# Altered Query (Attempting to Access Private Data)
+altered_query = "SELECT * FROM meetings"
 
-# Encode the message in Latin-1 encoding
-message_encoded = message.encode('latin-1')
+# Unknown Secret Key (Replace with actual value if known)
+secret_key = b"your-actual-32-byte-secret-key"
 
-# Calculate the HMAC-SHA256 signature using the secret key and message
-signature = hmac.new(secret_key, message_encoded, hashlib.sha256).hexdigest()
+# Compute HMAC-SHA256 hashes
+query_encoded = query.encode('latin-1')
+altered_query_encoded = altered_query.encode('latin-1')
 
-# Create the JSON payload
+original_hash = hmac.new(secret_key, query_encoded, hashlib.sha256).hexdigest()
+altered_hash = hmac.new(secret_key, altered_query_encoded, hashlib.sha256).hexdigest()
+
+print(f"Original Query Hash: {original_hash}")
+print(f"Altered Query Hash: {altered_hash}")
+
+# Send the request (Trying different formats)
 data = {
-    'message': message,
-    'signature': signature
+    "query": altered_query,
+    "original_query": query,  # Keeping original query in case it's needed
+    "32_byte_secret_plus_query_hash": altered_hash
 }
 
-# Send the data to the verification endpoint with the correct Content-Type
-headers = {'Content-Type': 'application/json'}
+headers = {"Content-Type": "application/json"}
 response = requests.post(verify_url, data=json.dumps(data), headers=headers)
 
-# Print the response from the server
 print("Response:", response.text)

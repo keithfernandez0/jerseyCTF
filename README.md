@@ -6,11 +6,8 @@ Welcome to **jerseyCTF**, a repository dedicated to hosting the code used in NJI
 ## Table of Contents
 - [About the Event](#about-the-event)
 - [Repository Structure](#repository-structure)
-- [Setup Instructions](#setup-instructions)
 - [Challenges](#challenges)
-- [Contributing](#contributing)
 - [License](#license)
-- [Contact](#contact)
 
 ## About the Event
 **jerseyCTF** is a cybersecurity hackathon designed to challenge participants with a variety of security-related tasks, including:
